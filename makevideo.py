@@ -1,35 +1,47 @@
-import imageio
-from skimage.io import imread
 import napari
+import glob
+import os
+from skimage import io
+import imageio
 
 # Function to save the current view as a video
-def save_video(viewer, path, fps=1):
+def save_video(tiff_files_1, tiff_files_2, path, fps=10):
     writer = imageio.get_writer(path, fps=fps)
 
-    # Iterate through the time dimension (assumed to be axis 0)
-    for i in range(data1.shape[0]):
-        viewer.dims.set_point(0, i)  # Update the viewer to show the ith time point
-        viewer.camera.angles = (0, 0, 90+5*i)
+    i = 0
+    for tiff_file_1, tiff_file_2 in zip(tiff_files_1, tiff_files_2):
+        # Read the TIFF files
+        image_1 = io.imread(tiff_file_1)
+        image_2 = io.imread(tiff_file_2)
+
+        # Start a Napari viewer
+        viewer = napari.Viewer()
+
+        viewer.dims.set_point(0, i)
+        viewer.add_image(image_1, name='488', colormap='bop blue', contrast_limits=[0, 3000], opacity=0.8)
+        viewer.add_image(image_2, name='560', colormap='bop orange', contrast_limits=[0, 3000], opacity=0.8)
+
         viewer.dims.ndisplay = 3
+        viewer.camera.angles = (0, 20 + i * len(tiff_files_1)/180, 90)
         frame = viewer.screenshot()  # Take a screenshot of the current view
         writer.append_data(frame)  # Add the screenshot to the video
+        print(i)
+        i += 1
     writer.close()
 
 # Example data (replace these with your actual datasets)
 nchannels = [488, 560]
 file_pattern = "/Users/andyzjc/Downloads/Test/{}/*.tif"
-channels = [imread(file_pattern.format(i)) for i in nchannels]
+channels = [file_pattern.format(i) for i in nchannels]
 
-data1 = channels[0]  # Simulated time series data for layer 1
-data2 = channels[1]  # Simulated time series data for layer 2
+# Get sorted lists of TIFF files for each wavelength/color
+tiff_files_1 = glob.glob(channels[0])
+tiff_files_2 = glob.glob(channels[1])
 
-# Start a Napari viewer
-viewer = napari.Viewer()
-
-# Add the datasets as layers to the viewer
-# Adjust the colormap, blending, etc., as needed
-viewer.add_image(data1, name='488', colormap='bop blue', contrast_limits=[0, 3000], opacity=0.8)
-viewer.add_image(data2, name='560', colormap='bop orange', contrast_limits=[0, 3000], opacity=0.8)
+# Check if the number of files in both folders is the same
+assert len(tiff_files_1) == len(tiff_files_2), "The number of TIFF files in each folder must be the same."
 
 # Save the video (adjust path and filename as necessary)
-save_video(viewer, 'output_video.mp4')
+save_video(tiff_files_1, tiff_files_2, 'output_video4.mp4')
+
+
