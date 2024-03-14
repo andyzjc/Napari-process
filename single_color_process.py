@@ -32,16 +32,15 @@ for tiff_file_1, tiff_file_2 in zip(tiff_files_1, tiff_files_2):
     print(tiff_file_1)
     print(tiff_file_2)
 
-    layer1 = viewer.add_image(image_1, name='488', colormap=membrane_cmap, contrast_limits=[0, 5000], opacity=1)
-    layer2 = viewer.add_image(image_2, name='560', colormap=nucleus_cmap, contrast_limits=[0, 5000], opacity=0.5)
+    layer1 = viewer.add_image(image_1, name='488', colormap=membrane_cmap, contrast_limits=[0, 5000], opacity=1, gamma=0.5, depiction='iso', iso_threshold=350)
+    layer2 = viewer.add_image(image_2, name='560', colormap=nucleus_cmap, contrast_limits=[0, 5000], opacity=0.5, gamma=0.5, depiction='iso',iso_threshold=350)
 
     viewer.dims.ndisplay = 3
     viewer.camera.angles = (0, 0, 90)
     viewer.camera.center = (0, 300, 530)
     viewer.camera.zoom = 2.5
 
-    napari.run()
-    save_image = output_path + f'depiction_iso_gamma_0.5_image_{i}.png'  # Change file extension if necessary-
+    save_image = output_path + f'depiction_iso_gamma_0.5_image_{i}.png'  # Change file extension if necessary
 
     frame = viewer.screenshot(path=save_image, size=[1008, 1008])  # Take a screenshot of the current view
     viewer.layers.remove(layer1)
