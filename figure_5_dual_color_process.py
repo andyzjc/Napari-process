@@ -53,17 +53,25 @@ bg560 = 2 # estimated based on mip
 # viewer.scale_bar.position = 'bottom_left'
 # viewer.scale_bar.unit = "pixel"
 # viewer.camera.center = (266.31, 511.5, 539.5)
-# viewer.camera.angles = (-92.9, 29, 84)
-# viewer.camera.zoom = 0.5
+# viewer.camera.angles = (-96.30760603888365, 20.736489465576195, 78.97015296715203)
+# viewer.camera.zoom = 0.57
 # viewer.layers[0].contrast_limits = [60,5000]
 # viewer.layers[0].bounding_box.line_color = [0,0,0,0]
 # viewer.layers[0].bounding_box.line_color = [1,1,1,1]
+# viewer.layers[0].bounding_box.points = False
 
 # yz overview
 # viewer.camera.angles = (0.0, 0.0, 90.0)
 # viewer.camera.center = (0.0, 263.90990127723853, 513.1285626575371)
 # viewer.camera.zoom = 0.577
 # viewer.layers[0].contrast_limits= [80,3100]
+
+# crop with a shape
+# shape_coordinate = [[  24.03321371,  567.        ,   81.09592696],
+#         [ 239.67495914,  567.        ,   81.09592696],
+#         [ 239.67495914,  567.        , 1029.33750642],
+#         [  24.03321371,  567.        , 1029.33750642]]
+# crop_shape = viewer.add_shapes(data=shape_coordinate, ndim=3,shape_type='rectangle',)
 
 i = 0
 for tiff_file_1, tiff_file_2 in zip(tiff_files_1, tiff_files_2):

@@ -28,7 +28,7 @@ viewer.scale_bar.position = 'bottom_left'
 viewer.scale_bar.unit = "pixel"
 
 # bounding box
-layer1.bounding_box.visible = True
+layer1.bounding_box.visible = False
 layer1.bounding_box.line_color = [1, 1, 1, 1]
 layer1.bounding_box.opacity = 0.5
 
@@ -51,6 +51,11 @@ viewer.camera.zoom = 0.7
 viewer.layers[0].contrast_limits = [20,1700]
 save_image = output + 'xy_mip.png'  # Change file extension if necessary-
 frame = viewer.screenshot(path=save_image, size=[1008, 1008])  # Take a screenshot of the current view
+
+# XY view tilted
+viewer.camera.angles = (-141.63497427428373, -12.157949701378651, 72.40760687552508)
+viewer.camera.center = (400.0, 900.0, 300.0)
+viewer.camera.zoom = 1.9
 
 # XZ view, need to rotate axis
 viewer.camera.angles = (0.0, 0.0, 90.0)
