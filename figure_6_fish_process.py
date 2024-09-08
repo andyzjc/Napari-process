@@ -9,7 +9,7 @@ import cmap
 
 #some parameter
 output = "/Users/andyzjc/Downloads"
-color_map = cmap.Colormap('opf_fresh').lut()
+color_map = cmap.Colormap('gray').lut()
 viewer = napari.Viewer()
 
 file = "/Users/andyzjc/Downloads/PEARLS_NA0p42na0p38_SQ_50mWOutput_CamA_ch0_CAM1_stack0000_488nm_0000000msec_0000926499msecAbs_-01x_-01y_-01z_0000t_decon.tif"

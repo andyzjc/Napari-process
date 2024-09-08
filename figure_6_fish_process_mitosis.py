@@ -8,11 +8,11 @@ import cmap
 
 
 #some parameter
-output = "/Users/andyzjc/Downloads/cell4/"
-color_map = cmap.Colormap('cyan').lut()
+output = "/Users/andyzjc/Princeton Dropbox/Andy Zhang/Polarizatino Engineered Aberration Robust Adaptive Light Sheet Microscope/Figures/Figure 6/Fig6_2/data/fish/cell3/"
+color_map = cmap.Colormap('gray').lut()
 viewer = napari.Viewer()
 
-file = "/Users/andyzjc/Downloads/cell4/*.tif"
+file = "/Users/andyzjc/Princeton Dropbox/Andy Zhang/Polarizatino Engineered Aberration Robust Adaptive Light Sheet Microscope/Figures/Figure 6/Fig6_2/data/fish/cell3/*.tif"
 tiff_files_1 = glob.glob(file)
 tiff_files_1.sort()
 
